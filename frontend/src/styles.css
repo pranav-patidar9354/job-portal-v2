@@ -1,0 +1,30 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f6f7fb;color:#171a21}
+a{text-decoration:none;color:inherit}
+.nav{height:70px;background:#fff;border-bottom:1px solid #e6e8ee;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:10}
+.brand{font-size:22px;font-weight:800}.brand span{color:#5b5ce2}
+.nav-links{display:flex;gap:20px;align-items:center}.nav-links a{font-weight:600;color:#555}
+.container{max-width:1150px;margin:auto;padding:50px 24px}.narrow{max-width:850px}
+.hero{min-height:calc(100vh - 70px);display:grid;place-items:center;padding:50px 8%;background:linear-gradient(135deg,#f6f7fb,#eceeff)}
+.hero h1{font-size:72px;line-height:1.02;margin:12px 0}.hero h1 span{color:#5b5ce2}
+.hero-text{font-size:20px;color:#626777}.hero-actions,.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;color:#5b5ce2}
+.button{display:inline-flex;justify-content:center;align-items:center;border:0;border-radius:10px;background:#5b5ce2;color:white;padding:12px 18px;font-weight:700;cursor:pointer}
+.button.secondary{background:#eef0f6;color:#30333b}.button.danger{background:#df4f5f}.button.small{padding:8px 12px;font-size:13px}
+.card{background:#fff;border:1px solid #e4e6ed;border-radius:16px;padding:24px;box-shadow:0 8px 25px rgba(20,25,40,.04)}
+.page-head{margin-bottom:25px}.container h2{font-size:38px;margin:4px 0 25px}
+.search-bar{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.job-card{transition:.2s}.job-card:hover{transform:translateY(-3px)}
+.job-card h3{margin:14px 0 7px}.tag{display:inline-block;background:#eef0ff;color:#5556c9;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:700}
+.muted{color:#707583}.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.auth-page{min-height:calc(100vh - 70px);display:grid;place-items:center;padding:30px}.auth-card{width:min(430px,100%)}.auth-card h2{margin-top:0;font-size:32px}
+.auth-card input,.auth-card select,.search-bar input,.search-bar select,.form-card input,.form-card select,.form-card textarea,.apply-box textarea,.applicant select{width:100%;padding:12px 13px;border:1px solid #dfe2e9;border-radius:9px;background:white;font:inherit;margin-bottom:12px}
+.auth-card .button{width:100%}.error{background:#fff0f1;color:#bd3040;padding:10px;border-radius:8px;margin:10px 0}.success{background:#edfff3;color:#1d8242;padding:10px;border-radius:8px;margin:10px 0}
+.details h1{font-size:46px;margin:15px 0 5px}.subtitle{font-size:18px;color:#666}.details hr{border:0;border-top:1px solid #eee;margin:25px 0}.description{white-space:pre-wrap;line-height:1.7}
+.apply-box{margin-top:25px}.apply-box textarea,.form-card textarea{min-height:130px;resize:vertical}
+.stack{display:flex;flex-direction:column;gap:14px}.application,.applicant{display:flex;align-items:center;justify-content:space-between;gap:20px}.application h3,.applicant h3{margin:0 0 6px}
+.status{padding:7px 12px;border-radius:20px;font-size:12px;font-weight:800;background:#eef0f6}.status.accepted{background:#e9fff0;color:#16803c}.status.rejected{background:#fff0f1;color:#bd3040}.status.reviewing,.status.shortlisted{background:#fff8df;color:#8c6900}
+.pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:28px}.pagination button{border:1px solid #ddd;background:#fff;padding:10px 15px;border-radius:8px}.pagination button:disabled{opacity:.5}
+.empty{text-align:center;color:#777}.form-card{margin-bottom:30px}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.back{display:inline-block;margin-bottom:15px;color:#5556c9;font-weight:700}
+@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}.search-bar{grid-template-columns:1fr 1fr}.hero h1{font-size:52px}}
+@media(max-width:600px){.nav{padding:0 4%}.nav-links{gap:10px;font-size:13px}.grid{grid-template-columns:1fr}.search-bar,.form-grid{grid-template-columns:1fr}.application,.applicant{align-items:flex-start;flex-direction:column}.hero h1{font-size:44px}}
