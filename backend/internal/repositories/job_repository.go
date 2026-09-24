@@ -37,13 +37,13 @@ func (r *JobRepository) List(q dto.JobQuery) ([]models.Job, int64, error) {
 
 	if q.Search != "" {
 		s := "%" + q.Search + "%"
-		db = db.Where("title LIKE ? OR description LIKE ?", s, s)
+		db = db.Where("title ILIKE ? OR description ILIKE ?", s, s)
 	}
 	if q.Location != "" {
-		db = db.Where("location LIKE ?", "%"+q.Location+"%")
+		db = db.Where("location ILIKE ?", "%"+q.Location+"%")
 	}
 	if q.Company != "" {
-		db = db.Where("company LIKE ?", "%"+q.Company+"%")
+		db = db.Where("company ILIKE ?", "%"+q.Company+"%")
 	}
 	if q.JobType != "" {
 		db = db.Where("job_type = ?", q.JobType)

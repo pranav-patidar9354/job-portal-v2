@@ -1,6 +1,6 @@
 Job Portal V2
 
-A full-stack job portal built with Go, Gin, GORM, MySQL, React, Vite, JWT, and Axios.
+A full-stack job portal built with Go, Gin, GORM, PostgreSQL (Neon), React, Vite, JWT, and Axios.
 
 The application provides separate workflows for Candidates and Recruiters, including authentication, job management, job discovery, applications, application-status tracking, saved jobs, search, filtering, sorting, pagination, and role-based authorization.
 
@@ -98,7 +98,7 @@ Gin — HTTP web framework
 
 GORM — ORM
 
-MySQL — relational database
+PostgreSQL (Neon) — relational database
 
 JWT — authentication
 
@@ -126,7 +126,7 @@ GitHub
 
 VS Code
 
-MySQL Workbench
+pgAdmin / DBeaver / Neon Console
 
 🏗️ Architecture
 
@@ -156,7 +156,7 @@ The application follows a layered backend architecture:
                        GORM
                          │
                          ▼
-                       MySQL
+                 PostgreSQL (Neon)
 
 Request Flow
 
@@ -176,7 +176,7 @@ Repository
    ↓
 GORM
    ↓
-MySQL
+PostgreSQL (Neon)
 
 📁 Project Structure
 
@@ -540,7 +540,7 @@ GET /api/v1/jobs?search=backend&location=Delhi&min_salary=500000&page=1&limit=6
 
 Prerequisites
 
-Install:
+Install / Setup:
 
 Go
 
@@ -548,7 +548,7 @@ Node.js
 
 npm
 
-MySQL
+PostgreSQL (or free cloud account on [Neon](https://neon.tech))
 
 Git
 
@@ -557,9 +557,15 @@ Git
 git clone https://github.com/pranav-patidar9354/job-portal-v2.git
 cd job-portal-v2
 
-2. Create the MySQL database
+2. Set up the Database
 
-Open MySQL and run:
+Option A: Neon Serverless PostgreSQL (Recommended)
+1. Sign up / log in to [neon.tech](https://neon.tech).
+2. Create a new project/database.
+3. Copy the pooled or direct PostgreSQL connection string (starts with `postgresql://...`).
+
+Option B: Local PostgreSQL
+Open PostgreSQL (psql or pgAdmin) and run:
 
 CREATE DATABASE job_portal_v2;
 
@@ -571,16 +577,24 @@ backend/
 
 Create .env from .env.example.
 
-Example:
+Example using Neon:
 
 PORT=8080
 JWT_SECRET=your-secret-key
+CLIENT_URL=http://localhost:5173
+DATABASE_URL=postgresql://user:password@ep-sample.us-east-2.aws.neon.tech/neondb?sslmode=require
 
+Or example using local PostgreSQL:
+
+PORT=8080
+JWT_SECRET=your-secret-key
+CLIENT_URL=http://localhost:5173
 DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=your_mysql_password
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=your_postgres_password
 DB_NAME=job_portal_v2
+DB_SSLMODE=disable
 
 Do not commit .env to GitHub.
 
@@ -750,7 +764,7 @@ Automated tests and CI/CD
 This project is a decoupled full-stack application consisting of:
 - **Frontend**: React + Vite SPA
 - **Backend**: Go (Gin) + GORM REST API
-- **Database**: MySQL
+- **Database**: PostgreSQL (Neon Serverless Postgres recommended)
 
 ### 1. Deploy Frontend on Vercel
 
@@ -780,23 +794,26 @@ Follow the interactive prompts to link and deploy the project.
 
 ### 2. Deploy Backend & Database
 
-Because the backend is a persistent Go HTTP service using MySQL, deploy it to a service like **Render**, **Railway**, **Fly.io**, or a VPS:
+The backend is configured to run as a **Vercel Serverless Function** (via `backend/api/index.go` & `backend/vercel.json`) or as a traditional service on **Render**, **Railway**, or **Fly.io**, connecting to **Neon PostgreSQL**:
 
-1. **Database**: Create a managed MySQL database (e.g. on [Aiven](https://aiven.io), [Railway](https://railway.app), or [TiDB Cloud](https://tidbcloud.com)).
-2. **Backend Environment Variables**:
-   - `PORT`: `8080` (or platform default)
-   - `JWT_SECRET`: A long random secret key
-   - `CLIENT_URL`: `https://your-frontend.vercel.app` (enables CORS for your Vercel site)
-   - `DB_HOST`: Your cloud database host
-   - `DB_PORT`: `3306`
-   - `DB_USER`: Your cloud database username
-   - `DB_PASSWORD`: Your cloud database password
-   - `DB_NAME`: Your database name
-3. Deploy the backend using the root directory `backend/` and start command:
-   ```bash
-   go run ./cmd
-   ```
-   (or build binary with `go build -o server ./cmd` and run `./server`).
+#### Option A: Deploy Backend on Vercel (Recommended)
+1. Go to [vercel.com](https://vercel.com) and click **Add New...** > **Project**.
+2. Select the repository: `pranav-patidar9354/job-portal-v2`.
+3. In **Project Settings**:
+   - **Project Name**: e.g., `job-portal-v2-backend`
+   - **Root Directory**: Click *Edit* and select `backend`.
+   - **Framework Preset**: *Other* (detected automatically).
+4. Under **Environment Variables**, add:
+   - `DATABASE_URL`: Your Neon PostgreSQL connection string (`postgresql://...sslmode=require`)
+   - `JWT_SECRET`: A long random secret string (e.g. `your-production-jwt-secret-key-32chars`)
+   - `CLIENT_URL`: Your frontend Vercel URL (e.g. `https://job-portal-v2-frontend.vercel.app`)
+5. Click **Deploy**. Copy the backend URL (e.g., `https://job-portal-v2-backend.vercel.app`).
+6. Update your frontend project's `VITE_API_URL` environment variable to `https://<your-backend-url>/api/v1` and redeploy frontend if needed.
+
+#### Option B: Deploy Backend on Render / Railway / Fly.io
+1. Create a Web Service pointing to `backend/`.
+2. Set Build Command: `go build -o server ./cmd` and Start Command: `./server` (or `go run ./cmd`).
+3. Add environment variables: `DATABASE_URL`, `JWT_SECRET`, `CLIENT_URL`, `PORT=8080`.
 
 📄 License
 

@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
 	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/models"
@@ -14,18 +14,22 @@ import (
 var DB *gorm.DB
 
 func ConnectDatabase() error {
-	host := env("DB_HOST", "localhost")
-	port := env("DB_PORT", "3306")
-	user := env("DB_USER", "root")
-	password := os.Getenv("DB_PASSWORD")
-	name := env("DB_NAME", "job_portal_v2")
+	dsn := os.Getenv("DATABASE_URL")
+	if dsn == "" {
+		host := env("DB_HOST", "localhost")
+		port := env("DB_PORT", "5432")
+		user := env("DB_USER", "postgres")
+		password := os.Getenv("DB_PASSWORD")
+		name := env("DB_NAME", "job_portal_v2")
+		sslmode := env("DB_SSLMODE", "disable")
 
-	dsn := fmt.Sprintf(
-		"%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		user, password, host, port, name,
-	)
+		dsn = fmt.Sprintf(
+			"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
+			host, user, password, name, port, sslmode,
+		)
+	}
 
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return err
 	}
