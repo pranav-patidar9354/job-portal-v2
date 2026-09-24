@@ -8,9 +8,9 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/dto"
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/models"
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/repositories"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/dto"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/models"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/repositories"
 )
 
 type AuthService struct{ Users *repositories.UserRepository }

@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/dto"
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/services"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/dto"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/services"
 )
 
 type ApplicationHandler struct{ Service *services.ApplicationService }

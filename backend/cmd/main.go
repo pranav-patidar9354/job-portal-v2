@@ -7,7 +7,7 @@ import (
 	"github.com/joho/godotenv"
 
 	"github.com/pranav-patidar9354/job-portal-v2/backend/config"
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/routes"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/routes"
 )
 
 func main() {

@@ -6,10 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/pranav-patidar9354/job-portal-v2/backend/config"
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/handlers"
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/middleware"
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/repositories"
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/services"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/handlers"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/middleware"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/repositories"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/services"
 )
 
 func SetupRouter() *gin.Engine {

@@ -8,7 +8,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/models"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/models"
 )
 
 var DB *gorm.DB

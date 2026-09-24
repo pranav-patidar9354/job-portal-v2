@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"github.com/pranav-patidar9354/job-portal-v2/backend/internal/models"
+	"github.com/pranav-patidar9354/job-portal-v2/backend/pkg/models"
 	"gorm.io/gorm"
 )
 
